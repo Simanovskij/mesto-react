@@ -8,9 +8,9 @@ import ImagePopup from "./ImagePopup";
 
 function App() {
 
-  const [isPopupProfileOpen, setIsPopupProfileOpen] = React.useState(false);
-  const [isPopupAddPlaceOpen, setIsPopupAddPlaceOpen] = React.useState(false);
-  const [isPopupAvatarEditOpen, setIsPopupAvatarEditOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({
     isOpen: false,
     name: '',
@@ -26,21 +26,21 @@ function App() {
   }
 
   const handleEditProfileClick = () => {
-    setIsPopupProfileOpen(true)
+    setIsEditProfilePopupOpen(true)
   }
 
   const handleEditAvatarClick = () => {
-    setIsPopupAvatarEditOpen(true)
+    setIsEditAvatarPopupOpen(true)
   }
 
   const handleAddPlaceClick = () => {
-    setIsPopupAddPlaceOpen(true)
+    setIsAddPlacePopupOpen(true)
   }
 
   const closeAllPopups = () => {
-    setIsPopupProfileOpen(false)
-    setIsPopupAvatarEditOpen(false)
-    setIsPopupAddPlaceOpen(false)
+    setIsEditProfilePopupOpen(false)
+    setIsEditAvatarPopupOpen(false)
+    setIsAddPlacePopupOpen(false)
     setSelectedCard({
       isOpen: false,
       name: '',
@@ -60,7 +60,7 @@ function App() {
         />
         <Footer />
         <PopupWithForm
-          isOpen={isPopupProfileOpen}
+          isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           name='edit'
           title='Редактировать профиль'
@@ -83,7 +83,7 @@ function App() {
           title='Вы уверены?'
         />
         <PopupWithForm
-          isOpen={isPopupAddPlaceOpen}
+          isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           name='add'
           title='Новое место'
@@ -102,7 +102,7 @@ function App() {
           }
         />
         <PopupWithForm
-          isOpen={isPopupAvatarEditOpen}
+          isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           name='avatar'
           title='Обновить аватар'
