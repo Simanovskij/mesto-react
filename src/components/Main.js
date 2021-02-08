@@ -18,6 +18,9 @@ function Main(props) {
         setUserAvatar(user.avatar);
         setCards(cards);
       })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [])
 
   return (
