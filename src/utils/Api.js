@@ -72,6 +72,14 @@ class Api {
       );
   }
 
+  changeLikeCardStatus(item, isLiked) {
+    if (isLiked) {
+      return this.delLike(item);
+    } else {
+      return this.setLike(item);
+    }
+  }
+
   setLike(item) {
     return fetch(`${this._baseUrl}cards/likes/${item._id}`, {
         headers: this._headers,

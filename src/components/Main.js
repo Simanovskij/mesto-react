@@ -23,7 +23,11 @@ function Main(props) {
         <button className="button button_type_add" aria-label="Добавить фото" type="button" onClick={props.onAddPlace} />
       </section>
       <section className="cards-list">
-        {props.cards.map(item => <Card key={item._id} {...item} onCardClick={props.onCardClick} />)}
+        {props.cards.map(card => <Card key={card._id} 
+        card={card} 
+        onCardClick={props.onCardClick} 
+        onCardLike={props.onCardLike}
+        onCardDelete={props.onCardDelete} />)}
       </section>
     </main>
   )

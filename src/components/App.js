@@ -27,9 +27,30 @@ function App() {
         const [user, cards] = res;
         setCurrentUser(user);
         setCards(cards);
-      })
+      },
+        (err) => console.log(err))
   }, [])
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    api.changeLikeCardStatus(card, isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        setCards(newCards);
+      },
+        (err) => console.log(err)
+      );
+  }
+
+  function handleCardDelete(card) {
+    api.delCard(card)
+    .then(() => {
+      const newCards = cards.filter((item) => item._id !== card._id);
+      setCards(newCards);
+    },
+    (err) => console.log(err)
+    );
+  }
 
   const handleCardClick = (name, link) => {
     setSelectedCard({
@@ -72,6 +93,8 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
             cards={cards}
           />
           <Footer />
