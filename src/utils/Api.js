@@ -18,8 +18,8 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {
-        headers: this._headers,
-      })
+      headers: this._headers,
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -27,8 +27,8 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
-        headers: this._headers,
-      })
+      headers: this._headers,
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -36,13 +36,13 @@ class Api {
 
   setUserInfo(item) {
     return fetch(`${this._baseUrl}users/me`, {
-        headers: this._headers,
-        method: 'PATCH',
-        body: JSON.stringify({
-          name: item.name,
-          about: item.feature,
-        }),
-      })
+      headers: this._headers,
+      method: 'PATCH',
+      body: JSON.stringify({
+        name: item.name,
+        about: item.about,
+      }),
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -50,13 +50,13 @@ class Api {
 
   setNewCard(item) {
     return fetch(`${this._baseUrl}cards`, {
-        headers: this._headers,
-        method: 'POST',
-        body: JSON.stringify({
-          name: item.name,
-          link: item.link,
-        }),
-      })
+      headers: this._headers,
+      method: 'POST',
+      body: JSON.stringify({
+        name: item.name,
+        link: item.link,
+      }),
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -64,9 +64,9 @@ class Api {
 
   delCard(item) {
     return fetch(`${this._baseUrl}cards/${item._id}`, {
-        headers: this._headers,
-        method: 'DELETE',
-      })
+      headers: this._headers,
+      method: 'DELETE',
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -82,9 +82,9 @@ class Api {
 
   setLike(item) {
     return fetch(`${this._baseUrl}cards/likes/${item._id}`, {
-        headers: this._headers,
-        method: 'PUT',
-      })
+      headers: this._headers,
+      method: 'PUT',
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -92,9 +92,9 @@ class Api {
 
   delLike(item) {
     return fetch(`${this._baseUrl}cards/likes/${item._id}`, {
-        headers: this._headers,
-        method: 'DELETE',
-      })
+      headers: this._headers,
+      method: 'DELETE',
+    })
       .then(res =>
         this._checkRepsonse(res)
       );
@@ -108,7 +108,8 @@ class Api {
         avatar: item.avatar,
       }),
     }
-  )}
+    )
+  }
 }
 
 const api = new Api({

@@ -6,6 +6,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
+import EditProfilePopup from './EditProfilePopup';
 
 
 function App() {
@@ -44,12 +45,12 @@ function App() {
 
   function handleCardDelete(card) {
     api.delCard(card)
-    .then(() => {
-      const newCards = cards.filter((item) => item._id !== card._id);
-      setCards(newCards);
-    },
-    (err) => console.log(err)
-    );
+      .then(() => {
+        const newCards = cards.filter((item) => item._id !== card._id);
+        setCards(newCards);
+      },
+        (err) => console.log(err)
+      );
   }
 
   const handleCardClick = (name, link) => {
@@ -83,6 +84,16 @@ function App() {
     })
   }
 
+  function handleUpdateUser(data) {
+    api.setUserInfo(data)
+      .then((user) => {
+        setCurrentUser(user);
+        closeAllPopups();
+      },
+        (err) => console.log(err)
+      )
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -98,23 +109,10 @@ function App() {
             cards={cards}
           />
           <Footer />
-          <PopupWithForm
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-            name='edit'
-            title='Редактировать профиль'
-            children={
-              <>
-                <label className="popup__label">
-                  <input id="name" name="name" required className="popup__input popup__input_type_name" type="text" minLength={2} maxLength={40} placeholder="Имя" />
-                  <span className="popup__error" id="name-error" />
-                </label>
-                <label className="popup__label">
-                  <input id="feature" name="feature" required className="popup__input popup__input_type_feature" type="text" minLength={2} maxLength={200} placeholder="Занятие" />
-                  <span className="popup__error" id="feature-error" />
-                </label>
-              </>
-            }
+            onUpdateUser={handleUpdateUser}
           />
           <PopupWithForm
             onClose={closeAllPopups}
