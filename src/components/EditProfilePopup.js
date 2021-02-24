@@ -1,19 +1,17 @@
 import React from 'react';
-import PopupWithForm from '../components/PopupWithForm'
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
-
+import PopupWithForm from '../components/PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
-
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
 
   function handleChangeName(evt) {
-    setName(evt.target.value)
+    setName(evt.target.value);
   }
 
   function handleChangeDescription(evt) {
-    setDescription(evt.target.value)
+    setDescription(evt.target.value);
   }
 
   const currentUser = React.useContext(CurrentUserContext);
@@ -36,8 +34,8 @@ function EditProfilePopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
-      name='edit'
-      title='Редактировать профиль'
+      name="edit"
+      title="Редактировать профиль"
       children={
         <>
           <label className="popup__label">
@@ -51,7 +49,8 @@ function EditProfilePopup(props) {
               maxLength={40}
               placeholder="Имя"
               onChange={handleChangeName}
-              value={name} />
+              value={name}
+            />
             <span className="popup__error" id="name-error" />
           </label>
           <label className="popup__label">
@@ -65,13 +64,14 @@ function EditProfilePopup(props) {
               maxLength={200}
               placeholder="Занятие"
               value={description}
-              onChange={handleChangeDescription} />
+              onChange={handleChangeDescription}
+            />
             <span className="popup__error" id="feature-error" />
           </label>
         </>
       }
     />
-  )
+  );
 }
 
 export default EditProfilePopup;
