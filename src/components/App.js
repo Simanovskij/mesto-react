@@ -8,6 +8,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -135,39 +136,9 @@ function App() {
             name="submit"
             title="Вы уверены?"
           />
-          <PopupWithForm
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-            name="add"
-            title="Новое место"
-            children={
-              <>
-                <label className="popup__label">
-                  <input
-                    id="place-name"
-                    name="name"
-                    required
-                    className="popup__input popup__input_type_place-name"
-                    placeholder="Название"
-                    type="text"
-                    minLength="2"
-                    maxLength="30"
-                  />
-                  <span className="popup__error" id="place-name-error"></span>
-                </label>
-                <label className="popup__label">
-                  <input
-                    id="place-link"
-                    name="link"
-                    required
-                    className="popup__input popup__input_type_link"
-                    placeholder="Ссылка на картинку"
-                    type="url"
-                  />
-                  <span className="popup__error" id="place-link-error"></span>
-                </label>
-              </>
-            }
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}

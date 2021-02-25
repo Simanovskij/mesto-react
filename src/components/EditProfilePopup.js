@@ -36,41 +36,38 @@ function EditProfilePopup(props) {
       onSubmit={handleSubmit}
       name="edit"
       title="Редактировать профиль"
-      children={
-        <>
-          <label className="popup__label">
-            <input
-              id="name"
-              name="name"
-              required
-              className="popup__input popup__input_type_name"
-              type="text"
-              minLength={2}
-              maxLength={40}
-              placeholder="Имя"
-              onChange={handleChangeName}
-              value={name}
-            />
-            <span className="popup__error" id="name-error" />
-          </label>
-          <label className="popup__label">
-            <input
-              id="feature"
-              name="feature"
-              required
-              className="popup__input popup__input_type_feature"
-              type="text"
-              minLength={2}
-              maxLength={200}
-              placeholder="Занятие"
-              value={description}
-              onChange={handleChangeDescription}
-            />
-            <span className="popup__error" id="feature-error" />
-          </label>
-        </>
-      }
-    />
+    >
+      <label className="popup__label">
+        <input
+          id="name"
+          name="name"
+          required
+          className="popup__input popup__input_type_name"
+          type="text"
+          minLength={2}
+          maxLength={40}
+          placeholder="Имя"
+          onChange={handleChangeName}
+          value={name}
+        />
+        <span className="popup__error" id="name-error" />
+      </label>
+      <label className="popup__label">
+        <input
+          id="feature"
+          name="feature"
+          required
+          className="popup__input popup__input_type_feature"
+          type="text"
+          minLength={2}
+          maxLength={200}
+          placeholder="Занятие"
+          value={description}
+          onChange={handleChangeDescription}
+        />
+        <span className="popup__error" id="feature-error" />
+      </label>
+    </PopupWithForm>
   );
 }
 
