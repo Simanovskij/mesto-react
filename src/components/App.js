@@ -25,6 +25,7 @@ function App() {
     name: '',
     link: '',
   });
+  const [isLoading, setIsloading] = React.useState(false);
 
   React.useEffect(() => {
     api.getInitialData().then(
@@ -49,13 +50,13 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.delCard(card).then(
-      () => {
+    api
+      .delCard(card)
+      .then(() => {
         const newCards = cards.filter((item) => item._id !== card._id);
         setCards(newCards);
-      },
-      (err) => console.log(err)
-    );
+      })
+      .catch((err) => console.log(err));
   }
 
   const handleCardClick = (name, link) => {
@@ -90,34 +91,45 @@ function App() {
   };
 
   function handleUpdateUser(data) {
-    api.setUserInfo(data).then(
-      (user) => {
-        console.log(user);
+    setIsloading(true);
+    api
+      .setUserInfo(data)
+      .then((user) => {
         setCurrentUser(user);
         closeAllPopups();
-      },
-      (err) => console.log(err)
-    );
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsloading(false);
+      });
   }
 
   function handleUpdateAvatar(data) {
-    api.setAvatar(data).then(
-      (user) => {
+    setIsloading(true);
+    api
+      .setAvatar(data)
+      .then((user) => {
         setCurrentUser(user);
         closeAllPopups();
-      },
-      (err) => console.log(err)
-    );
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsloading(false);
+      });
   }
 
   function handleAddPlaceSubmit(data) {
-    api.setNewCard(data).then(
-      (newCard) => {
+    setIsloading(true);
+    api
+      .setNewCard(data)
+      .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
-      },
-      (err) => console.log(err)
-    );
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsloading(false);
+      });
   }
 
   return (
@@ -139,6 +151,7 @@ function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            isLoading={isLoading}
           />
           <PopupWithForm
             onClose={closeAllPopups}
@@ -149,11 +162,13 @@ function App() {
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
+            isLoading={isLoading}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            isLoading={isLoading}
           />
           <ImagePopup onClose={closeAllPopups} card={selectedCard} />
         </div>

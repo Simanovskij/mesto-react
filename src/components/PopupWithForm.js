@@ -1,4 +1,6 @@
 function PopupWithForm(props) {
+  const submitButtonText = props.isLoading ? `Сохранение...` : `Сохранить`;
+
   return (
     <div
       className={
@@ -22,7 +24,7 @@ function PopupWithForm(props) {
         >
           {props.children}
           <button className="button button_type_submit" type="submit">
-            Сохранить
+            {submitButtonText}
           </button>
         </form>
       </div>
