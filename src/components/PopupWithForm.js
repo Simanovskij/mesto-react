@@ -1,5 +1,7 @@
 function PopupWithForm(props) {
-  const submitButtonText = props.isLoading ? `Сохранение...` : `Сохранить`;
+  const submitButtonText = props.isLoading
+    ? props.loadingSubmitText
+    : props.regularSubmitText;
 
   return (
     <div

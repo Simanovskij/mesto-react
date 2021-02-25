@@ -2,13 +2,13 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import SubmitPopup from './SubmitPopup';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -20,12 +20,15 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
     false
   );
+
+  const [isSubmitPopupOpen, setIsSubmitPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({
     isOpen: false,
     name: '',
     link: '',
   });
   const [isLoading, setIsloading] = React.useState(false);
+  const [deletedCard, setDeletedCard] = React.useState({});
 
   React.useEffect(() => {
     api.getInitialData().then(
@@ -49,14 +52,25 @@ function App() {
     );
   }
 
-  function handleCardDelete(card) {
+  function handleCardDelete(evt) {
+    evt.preventDefault();
+    setIsloading(true);
     api
-      .delCard(card)
+      .delCard(deletedCard)
       .then(() => {
-        const newCards = cards.filter((item) => item._id !== card._id);
+        const newCards = cards.filter((item) => item._id !== deletedCard._id);
         setCards(newCards);
+        closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsloading(false);
+      });
+  }
+
+  function handleSetCardForDelete(card) {
+    setDeletedCard(card);
+    setIsSubmitPopupOpen(true);
   }
 
   const handleCardClick = (name, link) => {
@@ -83,6 +97,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsSubmitPopupOpen(false);
     setSelectedCard({
       isOpen: false,
       name: '',
@@ -143,7 +158,7 @@ function App() {
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardDelete={handleSetCardForDelete}
             cards={cards}
           />
           <Footer />
@@ -153,10 +168,11 @@ function App() {
             onUpdateUser={handleUpdateUser}
             isLoading={isLoading}
           />
-          <PopupWithForm
+          <SubmitPopup
+            isOpen={isSubmitPopupOpen}
             onClose={closeAllPopups}
-            name="submit"
-            title="Вы уверены?"
+            onSubmit={handleCardDelete}
+            isLoading={isLoading}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}

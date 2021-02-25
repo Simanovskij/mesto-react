@@ -31,6 +31,8 @@ function AddPlacePopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isLoading={props.isLoading}
+      regularSubmitText="Добавить"
+      loadingSubmitText="Добавление..."
     >
       <label className="popup__label">
         <input
