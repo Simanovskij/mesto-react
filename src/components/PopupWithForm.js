@@ -1,4 +1,10 @@
 function PopupWithForm(props) {
+  function handleOverlayClose(evt) {
+    if (evt.target.classList.contains('popup')) {
+      props.onClose();
+    }
+  }
+
   const submitButtonText = props.isLoading
     ? props.loadingSubmitText
     : props.regularSubmitText;
@@ -10,6 +16,7 @@ function PopupWithForm(props) {
           ? `popup popup_type_${props.name} popup_opened`
           : `popup popup_type_${props.name}`
       }
+      onClick={handleOverlayClose}
     >
       <div className="popup__container">
         <button

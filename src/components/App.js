@@ -41,6 +41,18 @@ function App() {
     );
   }, []);
 
+  React.useEffect(() => {
+    const onKeypress = (evt) => {
+      if (evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener('keydown', onKeypress);
+    return () => {
+      document.removeEventListener('keydown', onKeypress);
+    };
+  }, []);
+
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api.changeLikeCardStatus(card, isLiked).then(
