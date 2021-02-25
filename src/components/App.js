@@ -22,8 +22,8 @@ function App() {
   );
 
   const [isSubmitPopupOpen, setIsSubmitPopupOpen] = React.useState(false);
+  const [isPopupImageOpen, setIsPopupImageOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({
-    isOpen: false,
     name: '',
     link: '',
   });
@@ -87,10 +87,10 @@ function App() {
 
   const handleCardClick = (name, link) => {
     setSelectedCard({
-      isOpen: true,
       name: name,
       link: link,
     });
+    setIsPopupImageOpen(true);
   };
 
   const handleEditProfileClick = () => {
@@ -110,11 +110,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsSubmitPopupOpen(false);
-    setSelectedCard({
-      isOpen: false,
-      name: '',
-      link: '',
-    });
+    setIsPopupImageOpen(false);
   };
 
   function handleUpdateUser(data) {
@@ -198,7 +194,11 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
             isLoading={isLoading}
           />
-          <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+          <ImagePopup
+            onClose={closeAllPopups}
+            card={selectedCard}
+            isOpen={isPopupImageOpen}
+          />
         </div>
       </div>
     </CurrentUserContext.Provider>
