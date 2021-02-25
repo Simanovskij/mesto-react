@@ -104,7 +104,16 @@ function App() {
     api.setAvatar(data).then(
       (user) => {
         setCurrentUser(user);
-        console.log(currentUser);
+        closeAllPopups();
+      },
+      (err) => console.log(err)
+    );
+  }
+
+  function handleAddPlaceSubmit(data) {
+    api.setNewCard(data).then(
+      (newCard) => {
+        setCards([newCard, ...cards]);
         closeAllPopups();
       },
       (err) => console.log(err)
@@ -139,6 +148,7 @@ function App() {
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
