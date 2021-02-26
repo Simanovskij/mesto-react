@@ -7,11 +7,7 @@ function ImagePopup(props) {
 
   return (
     <div
-      className={
-        props.isOpen
-          ? 'popup popup_type_image popup_opened'
-          : 'popup popup_type_image'
-      }
+      className={props.isOpen ? 'popup popup_type_image popup_opened' : 'popup popup_type_image'}
       onClick={handleOverlayClose}
     >
       <div className="popup__image-wrapper">
@@ -22,9 +18,7 @@ function ImagePopup(props) {
         />
         <figure className="popup__figure">
           <img className="popup__fig-image" src={props.card.link} alt="#" />
-          <figcaption className="popup__fig-caption">
-            {props.card.name}
-          </figcaption>
+          <figcaption className="popup__fig-caption">{props.card.name}</figcaption>
         </figure>
       </div>
     </div>

@@ -13,13 +13,9 @@ import SubmitPopup from './SubmitPopup';
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(
-    false
-  );
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
-    false
-  );
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
   const [isSubmitPopupOpen, setIsSubmitPopupOpen] = React.useState(false);
   const [isPopupImageOpen, setIsPopupImageOpen] = React.useState(false);
@@ -194,11 +190,7 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
             isLoading={isLoading}
           />
-          <ImagePopup
-            onClose={closeAllPopups}
-            card={selectedCard}
-            isOpen={isPopupImageOpen}
-          />
+          <ImagePopup onClose={closeAllPopups} card={selectedCard} isOpen={isPopupImageOpen} />
         </div>
       </div>
     </CurrentUserContext.Provider>

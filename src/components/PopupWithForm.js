@@ -5,9 +5,7 @@ function PopupWithForm(props) {
     }
   }
 
-  const submitButtonText = props.isLoading
-    ? props.loadingSubmitText
-    : props.regularSubmitText;
+  const submitButtonText = props.isLoading ? props.loadingSubmitText : props.regularSubmitText;
 
   return (
     <div
@@ -25,12 +23,7 @@ function PopupWithForm(props) {
           onClick={props.onClose}
         />
         <h3 className="popup__title">{props.title}</h3>
-        <form
-          name={props.name}
-          className="popup__form"
-          noValidate
-          onSubmit={props.onSubmit}
-        >
+        <form name={props.name} className="popup__form" noValidate onSubmit={props.onSubmit}>
           {props.children}
           <button className="button button_type_submit" type="submit">
             {submitButtonText}
